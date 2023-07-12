@@ -19,24 +19,24 @@ btnConsulta.addEventListener('click', async (e) => {
 
     async function showCep(){
         const result = await endereco
-        console.log(result)
-        if(result.erro == true ){
+        
+        if(result.erro == 'true' || result.erro == true){
             if(error.classList.contains('hiden')){
                 error.classList.toggle('hiden')
             }
 
-        } else {
-            logradouro.value = `${JSON.stringify(result.logradouro, undefined, 2).replace(/["]/g, "")}`
-            bairro.value = `${JSON.stringify(result.bairro, undefined, 2).replace(/["]/g, "")}`
-            localidade.value = `${JSON.stringify(result.localidade, undefined, 2).replace(/["]/g, "")}`
-            uf.value = `${JSON.stringify(result.uf, undefined, 2).replace(/["]/g, "")}`
-            ddd.value = `(${JSON.stringify(result.ddd, undefined, 2).replace(/["]/g, "")})`
+        } else{
+            logradouro.value = `${replaceDash(JSON.stringify(result.logradouro, undefined, 2))}`
+            bairro.value = `${replaceDash(JSON.stringify(result.bairro, undefined, 2))}`
+            localidade.value = `${replaceDash(JSON.stringify(result.localidade, undefined, 2))}`
+            uf.value = `${replaceDash(JSON.stringify(result.uf, undefined, 2))}`
+            ddd.value = `(${replaceDash(JSON.stringify(result.ddd, undefined, 2))})`
             if(succes.classList.contains('hiden')){
                 succes.classList.remove('hiden')
             }
         }
     }
-    
+
     showCep()
     
 })
@@ -46,7 +46,6 @@ function getCep(cep){
                     .then(data => data.json())
                     .then(data => { return data })
                     .catch(() => {
-                        console.log("ocorreu um erro")
                         if(error.classList.contains('hiden')){
                             error.classList.remove('hiden')
                         }
@@ -92,4 +91,13 @@ function limpar(){
     localidade.value = ``
     uf.value = ``
     ddd.value = ``
+}
+
+function replaceDash(value){
+    if(value == undefined){
+       return ""
+    } else {
+        const finalValue = value.replace(/["]/g, "")
+       return finalValue
+    }
 }
