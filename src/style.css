@@ -1,0 +1,26 @@
+.gray {
+    color: gray;
+}
+
+.blue {
+  color: #006ce7;
+}
+
+.red {
+  color: red;
+}
+
+.input {
+  height: 44px;
+  background-color: #ededed;
+  border-radius: .5rem;
+  border: 3px solid transparent;
+  font-size: 1rem;
+}
+
+.hiden {
+  display: none;
+}
+
+
+  
